@@ -45,3 +45,21 @@ export function createSolvedCube(): Sticker[] {
 
     return stickers;
 }
+
+export type Axis = 'x' | 'y' | 'z';
+
+export function rotateVec(v: Vec3, axis: Axis, turns: number): Vec3{
+    const n = ((turns % 4) + 4) % 4;
+
+    let {x, y, z} = v;
+    for ( let i = 0 ; i < n; i++){
+        if (axis === 'x'){
+            [y,z] = [-z, y];
+        }else if (axis === 'y'){
+            [x,z] = [z,-x];
+        }else {
+            [x,y] = [-y,x];
+        }
+    }
+    return {x: x + 0, y: y + 0, z: z + 0};
+}
